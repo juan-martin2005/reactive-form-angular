@@ -1,0 +1,107 @@
+<div class="container mt-4 pt-4 d-flex flex-column align-items-center">
+  <div class="mb-3 text-center ">
+    <h4>REGISTRO DE EMPLEADOS</h4>
+  </div>
+  <div class="border p-4 rounded shadow row col-md-6 justify-content-center" style="max-width: 480px;">
+    <form [formGroup]="form">
+      <!-- Validaciones -->
+      <div class="mb-3">
+        <!-- Valinar el campo nombre -->
+        <div *ngIf="form.get('nombre')?.invalid && form.get('nombre')?.touched">
+          <span class="text-danger" *ngIf="form.get('nombre')?.hasError('required')">El nombre no debe estar vacío</span>
+          <span class="text-danger" *ngIf="form.get('nombre')?.hasError('minlength')">El nombre debe tener minimo 3 caracteres</span>
+        </div>
+        <!-- Valinar el campo apellido -->
+        <div *ngIf="form.get('apellido')?.invalid && form.get('apellido')?.touched">
+          <span class="text-danger" *ngIf="form.get('apellido')?.hasError('required')" >El apellido no debe estar vacio</span>
+          <span class="text-danger" *ngIf="form.get('apellido')?.hasError('minlength')">El nombre debe tener minimo 10 caracteres</span>
+        </div>
+        <!-- Valinar el campo correo -->
+        <div *ngIf="form.get('correo')?.invalid && form.get('correo')?.touched">
+          <span class="text-danger" >El correo no debe estar vacio</span>
+        </div>
+        <!-- Valinar el campo fecha -->
+        <div *ngIf="form.get('fechaNacimiento')?.invalid && form.get('fechaNacimiento')?.touched">
+          <span class="text-danger" *ngIf="form.get('fechaNacimiento')?.hasError('required')">La fecha de nacimiento no debe estar vacio</span>
+        </div>
+        <!-- Valinar el campo sexo -->
+        <div *ngIf="form.get('sexo')?.invalid && form.get('sexo')?.touched">
+          <span class="text-danger" *ngIf="form.get('sexo')?.hasError('required')">El sexo no debe estar vacio</span>
+        </div>
+        <!-- Valinar el campo direccion -->
+        <div *ngIf="form.get('direccion')?.invalid && form.get('direccion')?.touched">
+          <span class="text-danger" *ngIf="form.get('direccion')?.hasError('required')">La dirección no debe estar vacio</span>
+        </div>
+        <!-- Valinar el campo departamento -->
+        <div *ngIf="form.get('departamento')?.invalid && form.get('departamento')?.touched">
+          <span class="text-danger" *ngIf="form.get('departamento')?.hasError('required')">Seleccione algun departamento</span>
+        </div>
+        <!-- Valinar el campo jornada -->
+        <div *ngIf="form.get('jornada')?.invalid && form.get('jornada')?.touched">
+          <span class="text-danger" *ngIf="form.get('jornada')?.hasError('required')">Seleccione alguna jornada</span>
+        </div>
+        <!-- Valinar el campo sueldo -->
+        <div *ngIf="form.get('sueldo')?.invalid && form.get('sueldo')?.touched">
+          <span class="text-danger" *ngIf="form.get('sueldo')?.hasError('required')">El sueldo no debe estar vacio</span>
+          <span class="text-danger" *ngIf="form.get('sueldo')?.hasError('min')">El sueldo no puede ser negativo</span>
+        </div>
+      </div>
+      <!-- Campos del formulario -->
+      <div class="mb-3 row">
+        <label class="col-12">Nombre:
+          <input type="text" [ngClass]="{'form-control': true,'is-invalid': form.get('nombre')?.invalid && form.get('nombre')?.touched,}" placeholder="Nombre" formControlName="nombre" >
+        </label>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-12">Apellidos:
+          <input type="text" [ngClass]="{'form-control': true,'is-invalid': form.get('apellido')?.invalid && form.get('apellido')?.touched,}" placeholder="Apellidos" formControlName="apellido">
+        </label>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-12">Correo Electrónico:
+          <input type="email" [ngClass]="{'form-control': true,'is-invalid': form.get('correo')?.invalid && form.get('correo')?.touched,}" placeholder="example@gmail.com" formControlName="correo">
+        </label>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-12">Fecha de Nacimiento:
+          <input type="date" [ngClass]="{'form-control': true,'is-invalid': form.get('fechaNacimiento')?.invalid && form.get('fechaNacimiento')?.touched,}" formControlName="fechaNacimiento">
+        </label>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-12">Sexo: </label>
+        <div>
+          <input type="radio" class="m-0" formControlName="sexo" value="Masculino"> Masculino
+          <input type="radio" class="m-1" formControlName="sexo" value="Femenino" > Femenino
+        </div>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-12">Dirección:
+          <input type="text" [ngClass]="{'form-control': true,'is-invalid': form.get('direccion')?.invalid && form.get('direccion')?.touched,}" formControlName="direccion">
+        </label>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-md-6">Departamento:
+          <select [ngClass]="{'form-select': true,'is-invalid': form.get('departamento')?.invalid && form.get('departamento')?.touched,}" formControlName="departamento">
+            <option value="" selected disabled>--Seleccione--</option>
+            <option *ngFor="let dep of departamentos" [value]="dep">{{dep}}</option>
+          </select>
+        </label>
+        <label class="col-md-6">Jornada:
+          <select [ngClass]="{'form-select': true,'is-invalid': form.get('departamento')?.invalid && form.get('departamento')?.touched,}" formControlName="jornada">
+            <option value="" selected disabled>--Seleccione--</option>
+            <option *ngFor="let jor of jornadas" [value]="jor">{{jor}}</option>
+          </select>
+        </label>
+      </div>
+      <div class="mb-3 row">
+        <label class="col-12">Sueldo:
+          <input type="number" [ngClass]="{'form-control': true,'is-invalid': form.get('sueldo')?.invalid && form.get('sueldo')?.touched,}" formControlName="sueldo" >
+        </label>
+      </div>
+      <div class="mb-3">
+        <button class="btn btn-primary" [disabled]="form.invalid" (click)="enviar()">Registrar</button>
+        <button class="btn btn-light" (click)="limpiar()">Limpiar</button>
+      </div>
+    </form>
+  </div>
+</div>
