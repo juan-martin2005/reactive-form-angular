@@ -1,6 +1,15 @@
-# S4GonzalesJuan
+# Reactive Form with validation
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
+# Build
+First install the file node_module with
+```
+npm install
+```
+For the style use bootstrap 
+```
+npm i bootstrap@5.3.8
+```
 
 ## Development server
 
